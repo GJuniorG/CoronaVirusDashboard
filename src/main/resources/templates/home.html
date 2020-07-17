@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Coronavirus Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="container"  style="overflow-x:auto;">
+    <h1>Coronavirus Tracker</h1>
+    <p>This application lists the current number of cases reported across the globe</p>
+
+    <div class="jumbotron">
+        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+        <p class="lead">Total cases reported as of today</p>
+        <hr class="my-4">
+        <p>
+            <span>New cases reported since previous day:</span>
+            <span th:text="${totalNewCases}"></span>
+        </p>
+
+    </div>
+
+    <table class="table"
+           style="width:100%; border: 1px solid black;
+                    background-color: #f2f2f2; text-align: left;
+                    padding: 8px;font-family: Trebuchet MS, Arial, Helvetica, sans-serif;
+                    border-collapse: collapse">
+        <tr>
+            <th>Country</th>
+            <th>State</th>
+            <th>Total cases reported</th>
+            <th>Changes since last day</th>
+            <th>Total Deaths</th>
+            <th>Total deaths since last day</th>
+            <th>Total Recovered</th>
+            <th>Total recovered since last day</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.state}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+            <td th:text="${locationStat.totalDeaths}">0</td>
+            <td th:text="${locationStat.deathFromPreviousDay}">0</td>
+            <td th:text="${locationStat.totalRecovered}">0</td>
+            <td th:text="${locationStat.RecoveredFromPreviousDay}">0</td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>
